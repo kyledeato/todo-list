@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Form from './components/Form';
+import { useState } from 'react';
+import Display from './components/Display';
 
 function App() {
+  const [todos, setTodos] = useState([]);
+
+  const handleTodo = (newTodo) => {
+    setTodos([...todos, newTodo])
+  }
+
+  const handleDelete = (deleteIndex) => {
+    const filteredList = todos.filter((t,i) => i !== deleteIndex)
+    setTodos(filteredList)
+  }
+  
+  const checked = (updateList) => {
+    setTodos([...updateList])
+  }
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <Form onNewTodo={handleTodo}/>
+      <Display  todos={todos} handleDelete={handleDelete} checked={checked}/>
     </div>
   );
 }
