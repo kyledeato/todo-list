@@ -1,7 +1,7 @@
 
 import './App.css';
 import Form from './components/Form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Display from './components/Display';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
 
   const handleTodo = (newTodo) => {
     setTodos([...todos, newTodo])
+    localStorage.setItem('todos', JSON.stringify(todos))
   }
 
   const handleDelete = (deleteIndex) => {
@@ -18,8 +19,22 @@ function App() {
   
   const checked = (updateList) => {
     setTodos([...updateList])
+    localStorage.setItem('todos', JSON.stringify(todos))
   }
   
+  //get item from local storage
+  //todos are from local storage
+  // useEffect(()=>{
+  //   localStorage.setItem('todos', JSON.stringify(todos));
+  // },[todos])
+
+  useEffect(()=>{
+    const todos = JSON.parse(localStorage.getItem('todos'));
+    if(todos){
+      setTodos(todos)
+    }
+  },[])
+
 
   return (
     <div >

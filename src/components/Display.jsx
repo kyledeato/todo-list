@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 const Display = (props) => {
     
     const handleToggle = (idx) => {
@@ -6,7 +6,12 @@ const Display = (props) => {
         updateList[idx].complete = !updateList[idx].complete
         props.checked(updateList)
     }
-
+    // useEffect(()=>{
+    //     const todos = JSON.parse(localStorage.getItem('todos'));
+    //     if(todos){
+    //       setTodos(todos)
+    //     }
+    //   },[])
   return (
     <div>
          
